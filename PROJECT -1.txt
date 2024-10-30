@@ -1,0 +1,63 @@
+PROJECT -1  In this project, you will be creating a Basic Quiz Game using the Python programming language
+SOURCE CODE
+def ask_question(question, options, correct_answer):
+    print(f"\n{question}")
+    for i, option in enumerate(options, 1):
+        print(f"{i}. {option}")
+    while True:
+        try:
+            answer = int(input("Your answer (1-4): "))
+            if answer in range(1, 5):
+                break
+            else:
+                print("Invalid input. Please choose a number between 1 and 4.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+    return options[answer - 1] == correct_answer
+# Function to run the quiz
+def run_quiz(questions):
+    score = 0
+
+    for question_data in questions:
+        question = question_data['question']
+        options = question_data['options']
+        correct_answer = question_data['correct_answer']
+        if ask_question(question, options, correct_answer):
+            print("Correct!")
+            score += 1
+        else:
+            print(f"Wrong! The correct answer was: {correct_answer}")
+    return score
+def display_score(score, total_questions):
+    print(f"\nYou scored {score} out of {total_questions}.")
+    percentage = (score / total_questions) * 100
+    print(f"Your score: {percentage:.2f}%")
+quiz_questions = [
+    {
+        "question": "What is the capital of France?",
+        "options": ["Berlin", "Madrid", "Paris", "Rome"],
+        "correct_answer": "Paris"
+    },
+    {
+        "question": "What is 5 + 7?",
+        "options": ["10", "11", "12", "13"],
+        "correct_answer": "12"
+    },
+    {
+        "question": "Which planet is known as the Red Planet?",
+        "options": ["Earth", "Mars", "Jupiter", "Venus"],
+        "correct_answer": "Mars"
+    }
+]
+def main():
+    print("Welcome to the Quiz Game!")
+    total_questions = len(quiz_questions)
+    score = run_quiz(quiz_questions)
+    display_score(score, total_questions)
+
+# Start the quiz
+if __name__ == "__main__":
+    main()
+
+
+ 
